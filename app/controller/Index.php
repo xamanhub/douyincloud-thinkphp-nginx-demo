@@ -72,4 +72,17 @@ class Index extends BaseController
         }
         return json($out);
     }
+
+    
+    public function getTest($err_no, $err_msg, $data): Json
+    {
+        $out = array(
+            'err_no'    => $err_no,
+            'err_msg'   => $err_msg,
+        );
+        if(!is_null($data)){
+            $out['data'] = $data;
+        }
+        return json($out);
+    }
 }
