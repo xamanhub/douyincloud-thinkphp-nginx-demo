@@ -98,7 +98,6 @@ class Index extends BaseController
         //创建Access Token
         // $accessToken = AccessTokenBuilder::build(1327835398542126, ACCESS_TOKEN_SHOP_ID);
         // if (!$accessToken->isSuccess()) {
-        //     //todo
         //     return Json(null);
         // }
         // $request = new ProductListV2Request();
