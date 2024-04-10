@@ -86,7 +86,6 @@ class Index extends BaseController
     public function getTest(): Json
     {
         $queryParam = $this->request->param();
-        return self::getResponse('0', 'fail', $queryParam);
         //设置appKey和appSecret，全局设置一次
         GlobalConfig::getGlobalConfig()->appKey = $queryParam->appKey;
         GlobalConfig::getGlobalConfig()->appSecret = $queryParam->appSecret;
