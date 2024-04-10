@@ -1,4 +1,5 @@
 <?php
+
 /**
 Copyright (year) Bytedance Inc.
 
@@ -14,23 +15,32 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
  */
+
 namespace app\controller;
 
 use app\BaseController;
 use think\Http;
 use think\response\Json;
 
-require "autoload.php";
-include "open/api/product_listV2/ProductListV2Request.php";
-include "open/api/product_listV2/param/ProductListV2Param.php";
+require __DIR__ . '/../../lib/sdk-php/src/autoload.php';
+include __DIR__ . '/../../lib/sdk-php/src/open/api/product_listV2/ProductListV2Request.php';
+include __DIR__ . '/../../lib/sdk-php/src/open/api/product_listV2/param/ProductListV2Param.php';
+include __DIR__ . '/../../lib/sdk-php/src/open/core/GlobalConfig.php';
+include __DIR__ . '/../../lib/sdk-php/src/open/core/AccessTokenBuilder.php';
 
 class Index extends BaseController
 {
+    public function __construct()
+    {
+        //设置appKey和appSecret，全局设置一次
+        GlobalConfig::getGlobalConfig()->appKey = "tt881efea3172f470a01";
+        GlobalConfig::getGlobalConfig()->appSecret = "da8988eb6456b47452d1e11c875e7c70d9dcbab6";
+    }
 
     public function getOpenID(): Json
     {
         $target = $this->request->header('X-Tt-OPENID');
-        if(is_null($target)){
+        if (is_null($target)) {
             return self::getResponse(-1, 'invalid params', '');
         }
         return self::getResponse(0, 'success', $target);
@@ -40,28 +50,33 @@ class Index extends BaseController
     {
         $content = $this->request->post('content');
 
-        $data = array('tasks' =>
+        $data = array(
+            'tasks' =>
             array(array('content' => $content))
         );
-        $data_string = json_encode( $data );
+        $data_string = json_encode($data);
         $url = 'http://developer.toutiao.com/api/v2/tags/text/antidirt';
 
         $request = curl_init();
 
-        curl_setopt($request, CURLOPT_URL,$url);
+        curl_setopt($request, CURLOPT_URL, $url);
         curl_setopt($request, CURLOPT_POST, 1);
         curl_setopt($request, CURLOPT_POSTFIELDS, $data_string);
 
         curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($request, CURLOPT_HTTPHEADER, array(
+        curl_setopt(
+            $request,
+            CURLOPT_HTTPHEADER,
+            array(
                 'Content-Type: application/json',
-                'Content-Length: ' . strlen($data_string))
+                'Content-Length: ' . strlen($data_string)
+            )
         );
         $response = curl_exec($request);
 
-        curl_close ($request);
+        curl_close($request);
         $res = json_decode($response, true);
-        return self::getResponse('0','success', $res);
+        return self::getResponse('0', 'success', $res);
     }
 
 
@@ -71,15 +86,21 @@ class Index extends BaseController
             'err_no'    => $err_no,
             'err_msg'   => $err_msg,
         );
-        if(!is_null($data)){
+        if (!is_null($data)) {
             $out['data'] = $data;
         }
         return json($out);
     }
 
-    
+
     public function getTest($err_no, $err_msg, $data): Json
     {
+        //创建Access Token
+        $accessToken = AccessTokenBuilder::build(1327835398542126, ACCESS_TOKEN_SHOP_ID);
+        if (!$accessToken->isSuccess()) {
+            //todo
+            return Json(null);
+        }
         $request = new ProductListV2Request();
         $param = new ProductListV2Param();
         $request->setParam($param);
@@ -92,13 +113,13 @@ class Index extends BaseController
         $param->update_end_time = 1619161933;
         $param->page = 1;
         $param->size = 10;
-        $param->store_id = 123456;
+        $param->store_id = 1327835398542126;
         $param->name = "标题";
         $param->product_id = 3600137140018749665;
         $param->use_cursor = true;
-        $param->cursor_id = "WzE2ODI1Nzc4MjksMTc2NDMxMDczMDU3MDg0M10=";
+        // $param->cursor_id = "WzE2ODI1Nzc4MjksMTc2NDMxMDczMDU3MDg0M10=";
         $param->can_combine_product = true;
-        $response = $request->execute(accessToken);
-        return json($response)
+        $response = $request->execute($accessToken);
+        return json($response);
     }
 }
