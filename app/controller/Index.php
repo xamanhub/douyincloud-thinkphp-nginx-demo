@@ -82,16 +82,31 @@ class Index extends BaseController
     }
 
 
-
     public function getTest(): Json
     {
         $queryParam = $this->request->param();
+        $appKey = $this->request->param('appKey');
+        $appSecret = $this->request->param('appSecret');
+        $shopId = $this->request->param('shopId');
+        $status = $this->request->param('status');
+        $check_status = $this->request->param('check_status');
+        $product_type = $this->request->param('product_type');
+        $start_time = $this->request->param('start_time');
+        $end_time = $this->request->param('end_time');
+        $update_start_time = $this->request->param('update_start_time');
+        $update_end_time = $this->request->param('update_end_time');
+        $page = $this->request->param('page');
+        $size = $this->request->param('size');
+        $store_id = $this->request->param('store_id');
+        $name = $this->request->param('name');
+        $product_id = $this->request->param('product_id');
+        $use_cursor = $this->request->param('use_cursor');
+        $can_combine_product = $this->request->param('can_combine_product');
         //设置appKey和appSecret，全局设置一次
-        GlobalConfig::getGlobalConfig()->appKey = $queryParam->appKey;
-        GlobalConfig::getGlobalConfig()->appSecret = $queryParam->appSecret;
+        GlobalConfig::getGlobalConfig()->appKey = $appKey;
+        GlobalConfig::getGlobalConfig()->appSecret = $appSecret;
         //创建Access Token
-        $accessToken = AccessTokenBuilder::build($queryParam->shopId, ACCESS_TOKEN_SHOP_ID);
-        return self::getResponse('0', 'fail', $queryParam);
+        $accessToken = AccessTokenBuilder::build($shopId, ACCESS_TOKEN_SHOP_ID);
         if (!$accessToken->isSuccess()) {
             $out = array(
                 'err_no'    => $queryParam,
@@ -101,21 +116,21 @@ class Index extends BaseController
         }
         $request = new ProductListV2Request();
         $param = new ProductListV2Param();
-        $param->status = $queryParam->status; //0
-        $param->check_status = $queryParam->check_status; // || 3;
-        $param->product_type = $queryParam->product_type; // ||  0;
-        $param->start_time = $queryParam->start_time; // 1619161933;
-        $param->end_time = $queryParam->end_time; // 1619162000;
-        $param->update_start_time =  $queryParam->update_start_time; // 1619161933;
-        $param->update_end_time = $queryParam->update_end_time; //  1619161933;
-        $param->page =   $queryParam->page; //1;
-        $param->size =  $queryParam->size; // 10;
-        $param->store_id =  $queryParam->store_id; // 1327835398542126;
-        $param->name = $queryParam->name; //  "标题";
-        $param->product_id = $queryParam->product_id; // 3600137140018749665;
-        $param->use_cursor = $queryParam->use_cursor; // true;
+        $param->status = $status; //0
+        $param->check_status = $check_status; // || 3;
+        $param->product_type = $product_type; // ||  0;
+        $param->start_time = $start_time; // 1619161933;
+        $param->end_time = $end_time; // 1619162000;
+        $param->update_start_time =  $update_start_time; // 1619161933;
+        $param->update_end_time = $update_end_time; //  1619161933;
+        $param->page =   $page; //1;
+        $param->size =  $size; // 10;
+        $param->store_id =  $store_id; // 1327835398542126;
+        $param->name = $name; //  "标题";
+        $param->product_id = $product_id; // 3600137140018749665;
+        $param->use_cursor = $use_cursor; // true;
         // $param->cursor_id = "WzE2ODI1Nzc4MjksMTc2NDMxMDczMDU3MDg0M10=";
-        $param->can_combine_product = $queryParam->can_combine_product; // true;
+        $param->can_combine_product = $can_combine_product; // true;
         $request->setParam($param);
         $response = $request->execute($accessToken);
         return self::getResponse('0', 'success', $response);
