@@ -36,12 +36,6 @@ include __DIR__ . '/../../lib/sdk-php/src/open/core/AccessTokenBuilder.php';
 
 class Index extends BaseController
 {
-    public function __construct()
-    {
-        //设置appKey和appSecret，全局设置一次
-        GlobalConfig::getGlobalConfig()->appKey = "tt881efea3172f470a01";
-        GlobalConfig::getGlobalConfig()->appSecret = "da8988eb6456b47452d1e11c875e7c70d9dcbab6";
-    }
 
     public function getOpenID(): Json
     {
@@ -89,6 +83,9 @@ class Index extends BaseController
 
     public function getTest(): Json
     {
+        //设置appKey和appSecret，全局设置一次
+        GlobalConfig::getGlobalConfig()->appKey = "tt881efea3172f470a01";
+        GlobalConfig::getGlobalConfig()->appSecret = "da8988eb6456b47452d1e11c875e7c70d9dcbab6";
         //创建Access Token
         $accessToken = AccessTokenBuilder::build(1327835398542126, ACCESS_TOKEN_SHOP_ID);
         if (!$accessToken->isSuccess()) {
