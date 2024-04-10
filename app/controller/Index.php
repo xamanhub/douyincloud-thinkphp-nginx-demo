@@ -86,18 +86,6 @@ class Index extends BaseController
     }
 
 
-    public function getResponse($err_no, $err_msg, $data): Json
-    {
-        $out = array(
-            'err_no'    => $err_no,
-            'err_msg'   => $err_msg,
-        );
-        if (!is_null($data)) {
-            $out['data'] = $data;
-        }
-        return json($out);
-    }
-
 
     public function getTest(): Json
     {
@@ -106,7 +94,7 @@ class Index extends BaseController
         if (!$accessToken->isSuccess()) {
             $out = array(
                 'err_no'    => 1,
-                'err_msg'   => 2,
+                'err_msg'   => '没有accessToken',
             );
             return self::getResponse('0', 'fail', $out);
         }
@@ -130,5 +118,19 @@ class Index extends BaseController
         $param->can_combine_product = true;
         $response = $request->execute($accessToken);
         return self::getResponse('0', 'success', $response);
+    }
+
+
+
+    public function getResponse($err_no, $err_msg, $data): Json
+    {
+        $out = array(
+            'err_no'    => $err_no,
+            'err_msg'   => $err_msg,
+        );
+        if (!is_null($data)) {
+            $out['data'] = $data;
+        }
+        return json($out);
     }
 }
