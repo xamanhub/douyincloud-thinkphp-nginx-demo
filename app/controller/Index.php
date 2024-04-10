@@ -81,24 +81,24 @@ class Index extends BaseController
     public function getTest($err_no, $err_msg, $data): Json
     {
         $request = new ProductListV2Request();
-$param = new ProductListV2Param();
-$request->setParam($param);
-$param->status = 0;
-$param->check_status = 3;
-$param->product_type = 0;
-$param->start_time = 1619161933;
-$param->end_time = 1619162000;
-$param->update_start_time = 1619161933;
-$param->update_end_time = 1619161933;
-$param->page = 1;
-$param->size = 10;
-$param->store_id = 123456;
-$param->name = "标题";
-$param->product_id = 3600137140018749665;
-$param->use_cursor = true;
-$param->cursor_id = "WzE2ODI1Nzc4MjksMTc2NDMxMDczMDU3MDg0M10=";
-$param->can_combine_product = true;
-$response = $request->execute(accessToken);
-return json($response)
+        $param = new ProductListV2Param();
+        $request->setParam($param);
+        $param->status = 0;
+        $param->check_status = 3;
+        $param->product_type = 0;
+        $param->start_time = 1619161933;
+        $param->end_time = 1619162000;
+        $param->update_start_time = 1619161933;
+        $param->update_end_time = 1619161933;
+        $param->page = 1;
+        $param->size = 10;
+        $param->store_id = 123456;
+        $param->name = "标题";
+        $param->product_id = 3600137140018749665;
+        $param->use_cursor = true;
+        $param->cursor_id = "WzE2ODI1Nzc4MjksMTc2NDMxMDczMDU3MDg0M10=";
+        $param->can_combine_product = true;
+        $response = $request->execute(accessToken);
+        return json($response)
     }
 }
