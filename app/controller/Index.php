@@ -16,7 +16,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
  */
 
-// namespace app\controller;
+namespace app\controller;
 
 use app\BaseController;
 use think\Http;
@@ -100,7 +100,7 @@ class Index extends BaseController
         // if (!$accessToken->isSuccess()) {
         //     return Json(null);
         // }
-        $request = new ProductListV2Request();
+        $request = new \ProductListV2Request();
         // $param = new ProductListV2Param();
         // $request->setParam($param);
         // $param->status = 0;
