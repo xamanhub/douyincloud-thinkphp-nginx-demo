@@ -120,6 +120,10 @@ class Index extends BaseController
         // // $param->cursor_id = "WzE2ODI1Nzc4MjksMTc2NDMxMDczMDU3MDg0M10=";
         // $param->can_combine_product = true;
         // $response = $request->execute($accessToken);
-        return json(null);
+        $out = array(
+            'err_no'    => 1,
+            'err_msg'   => 2,
+        );
+        return json($out);
     }
 }
