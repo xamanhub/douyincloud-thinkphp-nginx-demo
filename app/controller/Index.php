@@ -91,6 +91,7 @@ class Index extends BaseController
         GlobalConfig::getGlobalConfig()->appSecret = $queryParam->appSecret;
         //创建Access Token
         $accessToken = AccessTokenBuilder::build($queryParam->shopId, ACCESS_TOKEN_SHOP_ID);
+        return self::getResponse('0', 'fail', $queryParam);
         if (!$accessToken->isSuccess()) {
             $out = array(
                 'err_no'    => $queryParam,
