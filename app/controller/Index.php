@@ -93,7 +93,7 @@ class Index extends BaseController
     }
 
 
-    public function getTest($err_no, $err_msg, $data): Json
+    public function getTest(): Json
     {
         //创建Access Token
         // $accessToken = AccessTokenBuilder::build(1327835398542126, ACCESS_TOKEN_SHOP_ID);
@@ -123,6 +123,6 @@ class Index extends BaseController
             'err_no'    => 1,
             'err_msg'   => 2,
         );
-        return json($out);
+        return self::getResponse('0', 'success', $out);
     }
 }
