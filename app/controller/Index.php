@@ -93,7 +93,7 @@ class Index extends BaseController
         $accessToken = AccessTokenBuilder::build(1327835398542126, ACCESS_TOKEN_SHOP_ID);
         if (!$accessToken->isSuccess()) {
             $out = array(
-                'err_no'    => 1,
+                'err_no'    => ACCESS_TOKEN_SHOP_ID,
                 'err_msg'   => '没有accessToken',
             );
             return self::getResponse('0', 'fail', $out);
