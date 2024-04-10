@@ -83,21 +83,22 @@ class Index extends BaseController
 
 
 
-    public function getTest(): Json
+    public function getTest($data): Json
     {
+        return self::getResponse('0', 'fail', $data);
         //设置appKey和appSecret，全局设置一次
         GlobalConfig::getGlobalConfig()->appKey = "tt881efea3172f470a01";
         GlobalConfig::getGlobalConfig()->appSecret = "da8988eb6456b47452d1e11c875e7c70d9dcbab6";
         $request = new CreateTokenRequest();
         $param = new CreateTokenParam();
-        $param->shop_id = 1327835398542126;
+        $param->shop_id = 18823176;
         $param->grant_type = "authorization_self";
         $param->code = "";
         $request->setParam($param);
         $resp = $request->execute(null);
         return self::getResponse('0', 'fail', $resp);
         //创建Access Token
-        $accessToken = AccessTokenBuilder::build(1327835398542126, ACCESS_TOKEN_SHOP_ID);
+        $accessToken = AccessTokenBuilder::build(18823176, ACCESS_TOKEN_SHOP_ID);
         if (!$accessToken->isSuccess()) {
             $out = array(
                 'err_no'    => $accessToken,
