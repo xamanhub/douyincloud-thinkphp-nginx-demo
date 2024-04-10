@@ -30,12 +30,12 @@ include __DIR__ . '/../../lib/sdk-php/src/open/core/AccessTokenBuilder.php';
 
 class Index extends BaseController
 {
-    public function __construct()
-    {
-        //设置appKey和appSecret，全局设置一次
-        GlobalConfig::getGlobalConfig()->appKey = "tt881efea3172f470a01";
-        GlobalConfig::getGlobalConfig()->appSecret = "da8988eb6456b47452d1e11c875e7c70d9dcbab6";
-    }
+    // public function __construct()
+    // {
+    //     //设置appKey和appSecret，全局设置一次
+    //     GlobalConfig::getGlobalConfig()->appKey = "tt881efea3172f470a01";
+    //     GlobalConfig::getGlobalConfig()->appSecret = "da8988eb6456b47452d1e11c875e7c70d9dcbab6";
+    // }
 
     public function getOpenID(): Json
     {
@@ -96,30 +96,30 @@ class Index extends BaseController
     public function getTest($err_no, $err_msg, $data): Json
     {
         //创建Access Token
-        $accessToken = AccessTokenBuilder::build(1327835398542126, ACCESS_TOKEN_SHOP_ID);
-        if (!$accessToken->isSuccess()) {
-            //todo
-            return Json(null);
-        }
-        $request = new ProductListV2Request();
-        $param = new ProductListV2Param();
-        $request->setParam($param);
-        $param->status = 0;
-        $param->check_status = 3;
-        $param->product_type = 0;
-        $param->start_time = 1619161933;
-        $param->end_time = 1619162000;
-        $param->update_start_time = 1619161933;
-        $param->update_end_time = 1619161933;
-        $param->page = 1;
-        $param->size = 10;
-        $param->store_id = 1327835398542126;
-        $param->name = "标题";
-        $param->product_id = 3600137140018749665;
-        $param->use_cursor = true;
-        // $param->cursor_id = "WzE2ODI1Nzc4MjksMTc2NDMxMDczMDU3MDg0M10=";
-        $param->can_combine_product = true;
-        $response = $request->execute($accessToken);
-        return json($response);
+        // $accessToken = AccessTokenBuilder::build(1327835398542126, ACCESS_TOKEN_SHOP_ID);
+        // if (!$accessToken->isSuccess()) {
+        //     //todo
+        //     return Json(null);
+        // }
+        // $request = new ProductListV2Request();
+        // $param = new ProductListV2Param();
+        // $request->setParam($param);
+        // $param->status = 0;
+        // $param->check_status = 3;
+        // $param->product_type = 0;
+        // $param->start_time = 1619161933;
+        // $param->end_time = 1619162000;
+        // $param->update_start_time = 1619161933;
+        // $param->update_end_time = 1619161933;
+        // $param->page = 1;
+        // $param->size = 10;
+        // $param->store_id = 1327835398542126;
+        // $param->name = "标题";
+        // $param->product_id = 3600137140018749665;
+        // $param->use_cursor = true;
+        // // $param->cursor_id = "WzE2ODI1Nzc4MjksMTc2NDMxMDczMDU3MDg0M10=";
+        // $param->can_combine_product = true;
+        // $response = $request->execute($accessToken);
+        return json(null);
     }
 }
