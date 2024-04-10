@@ -16,17 +16,17 @@ See the License for the specific language governing permissions and
 limitations under the License.
  */
 
-namespace app\controller;
+// namespace app\controller;
 
 use app\BaseController;
 use think\Http;
 use think\response\Json;
 
 require __DIR__ . '/../../lib/sdk-php/src/autoload.php';
-// include __DIR__ . '/../../lib/sdk-php/src/open/api/product_listV2/ProductListV2Request.php';
-// include __DIR__ . '/../../lib/sdk-php/src/open/api/product_listV2/param/ProductListV2Param.php';
-// include __DIR__ . '/../../lib/sdk-php/src/open/core/GlobalConfig.php';
-// include __DIR__ . '/../../lib/sdk-php/src/open/core/AccessTokenBuilder.php';
+include __DIR__ . '/../../lib/sdk-php/src/open/api/product_listV2/ProductListV2Request.php';
+include __DIR__ . '/../../lib/sdk-php/src/open/api/product_listV2/param/ProductListV2Param.php';
+include __DIR__ . '/../../lib/sdk-php/src/open/core/GlobalConfig.php';
+include __DIR__ . '/../../lib/sdk-php/src/open/core/AccessTokenBuilder.php';
 
 class Index extends BaseController
 {
