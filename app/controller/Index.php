@@ -100,7 +100,7 @@ class Index extends BaseController
         // if (!$accessToken->isSuccess()) {
         //     return Json(null);
         // }
-        // $request = new ProductListV2Request();
+        $request = new ProductListV2Request();
         // $param = new ProductListV2Param();
         // $request->setParam($param);
         // $param->status = 0;
